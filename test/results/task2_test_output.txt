@@ -1,0 +1,30 @@
+Running tests against local endpoints...
+==================================================
+
+Testing Travel Assistant Agent
+------------------------------
+Testing Travel Assistant ping...
+[PASS] Travel Assistant is healthy
+Testing Travel Assistant flight search...
+[PASS] Travel Assistant flight search working
+Testing Travel Assistant API endpoint...
+   Saved API response to: /Users/akshayarun/Desktop/Spring_2026/DSAN-6725/spring-2026-lab11-akshay17arun-2/test/results/search_flights_response.json
+[PASS] Travel Assistant API endpoint working
+Testing Travel Assistant recommendations...
+   Saved API response to: /Users/akshayarun/Desktop/Spring_2026/DSAN-6725/spring-2026-lab11-akshay17arun-2/test/results/recommendations_response.json
+[PASS] Travel Assistant recommendations working
+
+Testing Flight Booking Agent
+------------------------------
+Testing Flight Booking ping...
+[PASS] Flight Booking is healthy
+Testing Flight Booking availability check...
+[PASS] Flight Booking availability check working
+Testing Flight Booking reservation...
+[PASS] Flight Booking reservation working
+Testing Flight Booking API endpoint...
+   Saved API response to: /Users/akshayarun/Desktop/Spring_2026/DSAN-6725/spring-2026-lab11-akshay17arun-2/test/results/check_availability_response.json
+[PASS] Flight Booking API endpoint working
+
+==================================================
+All tests passed!

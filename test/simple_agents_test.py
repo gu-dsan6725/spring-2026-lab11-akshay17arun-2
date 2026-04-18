@@ -10,9 +10,27 @@ import logging
 import sys
 import time
 import uuid
+from pathlib import Path
 from typing import (
     Any,
 )
+
+RESULTS_DIR = Path(__file__).parent / "results"
+
+
+class _Tee:
+    """Write to multiple streams simultaneously."""
+
+    def __init__(self, *streams):
+        self._streams = streams
+
+    def write(self, data):
+        for s in self._streams:
+            s.write(data)
+
+    def flush(self):
+        for s in self._streams:
+            s.flush()
 
 import requests
 
@@ -222,6 +240,9 @@ class TravelAssistantTests:
         result_data = json.loads(response["result"])
         assert "flights" in result_data, "No flights in API response"
         assert len(result_data["flights"]) > 0, "No flights found"
+        out = RESULTS_DIR / "search_flights_response.json"
+        out.write_text(json.dumps(response, indent=2))
+        print(f"   Saved API response to: {out}")
         print("[PASS] Travel Assistant API endpoint working")
 
     def test_api_recommendations(self) -> None:
@@ -242,6 +263,9 @@ class TravelAssistantTests:
         assert "recommendations" in result_data, (
             "No recommendations in response"
         )
+        out = RESULTS_DIR / "recommendations_response.json"
+        out.write_text(json.dumps(response, indent=2))
+        print(f"   Saved API response to: {out}")
         print("[PASS] Travel Assistant recommendations working")
 
 
@@ -324,6 +348,9 @@ class FlightBookingTests:
         assert "available_seats" in result_data, (
             "No available_seats in response"
         )
+        out = RESULTS_DIR / "check_availability_response.json"
+        out.write_text(json.dumps(response, indent=2))
+        print(f"   Saved API response to: {out}")
         print("[PASS] Flight Booking API endpoint working")
 
 
@@ -381,7 +408,16 @@ def main() -> None:
         logging.getLogger().setLevel(logging.DEBUG)
         logger.info("Debug logging enabled")
 
-    success = run_tests()
+    RESULTS_DIR.mkdir(exist_ok=True)
+    output_file = RESULTS_DIR / "task2_test_output.txt"
+    with open(output_file, "w") as f:
+        sys.stdout = _Tee(sys.__stdout__, f)
+        try:
+            success = run_tests()
+        finally:
+            sys.stdout = sys.__stdout__
+
+    print(f"Test output saved to: {output_file}")
     sys.exit(0 if success else 1)
 
 
