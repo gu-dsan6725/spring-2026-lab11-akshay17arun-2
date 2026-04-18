@@ -1,0 +1,24 @@
+Running agent discovery and booking workflow tests...
+======================================================================
+Test 1: Travel agent searches for flights (solo)
+Test 2: Travel agent discovers booking agent and completes booking
+======================================================================
+
+1. Testing flight search (travel agent solo)...
+   [PASS] Travel agent searched for flights using its own tools
+   Response preview: I still don't see any flights available from New York to Los Angeles on December 20, 2025. The system shows 0 flights for this route and date.
+
+Would you like me to:
+1. Search for flights on nearby da...
+
+2. Testing flight booking with agent discovery...
+      [PASS] Booking agent discovered and invoked
+   Response preview: Unfortunately, the Flight Booking Agent is the only agent available that has the capabilities to reserve seats, confirm bookings, and process payments, but it's currently not responding to requests.
+
+...
+   [PASS] Complete booking workflow succeeded
+
+======================================================================
+All tests passed!
+======================================================================
+Observations saved to: /Users/akshayarun/Desktop/Spring_2026/DSAN-6725/spring-2026-lab11-akshay17arun-2/test/results/observations.md
